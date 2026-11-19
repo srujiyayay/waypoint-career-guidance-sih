@@ -1,0 +1,3107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waypoint — AI-Enhanced Career Guidance</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --paper:#EDEFF5;
+  --paper-2:#E2E6EF;
+  --ink:#191E36;
+  --ink-soft:#4A5074;
+  --navy-deep:#0F1330;
+  --navy-deep-2:#171B3D;
+  --amber:#E8A33D;
+  --amber-soft:#F3D9AC;
+  --teal:#2E8B84;
+  --teal-soft:#CFE7E4;
+  --coral:#D9634A;
+  --coral-soft:#F2D6CE;
+  --line:rgba(25,30,54,.14);
+  --line-dark:rgba(237,239,245,.16);
+  --radius:4px;
+  --max:1180px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Public Sans',sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+h1,h2,h3{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  line-height:1.08;
+  margin:0;
+  letter-spacing:-.01em;
+}
+
+p{margin:0}
+
+a{color:inherit}
+
+button,input,select{
+  font:inherit;
+}
+
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:0 32px;
+}
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--teal);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.eyebrow::before{
+  content:"";
+  width:18px;
+  height:1px;
+  background:var(--teal);
+  display:inline-block;
+}
+
+.eyebrow.on-dark{
+  color:var(--amber);
+}
+
+.eyebrow.on-dark::before{
+  background:var(--amber);
+}
+
+:focus-visible{
+  outline:2px solid var(--teal);
+  outline-offset:3px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* NAV */
+
+nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(237,239,245,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:18px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:20px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.logo-mark{
+  width:20px;
+  height:20px;
+  position:relative;
+  flex:none;
+}
+
+.nav-links{
+  display:flex;
+  gap:32px;
+  list-style:none;
+  margin:0;
+  padding:0;
+  font-size:14px;
+  font-weight:500;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--ink-soft);
+  transition:color .15s;
+}
+
+.nav-links a:hover{
+  color:var(--ink);
+}
+
+.nav-cta{
+  font-weight:600;
+  font-size:14px;
+  background:var(--ink);
+  color:var(--paper);
+  padding:10px 18px;
+  border-radius:var(--radius);
+  border:none;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.nav-cta:hover{
+  background:var(--navy-deep);
+}
+
+@media(max-width:860px){
+  .nav-links{display:none}
+}
+
+/* HERO */
+
+.hero{
+  padding:88px 0 64px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:48px;
+  align-items:center;
+}
+
+.badge-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+
+.badge{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.04em;
+  padding:5px 10px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  color:var(--ink-soft);
+}
+
+.hero h1{
+  font-size:clamp(38px,5vw,60px);
+  max-width:11.5ch;
+  margin-bottom:22px;
+}
+
+.hero h1 em{
+  font-style:italic;
+  color:var(--teal);
+}
+
+.hero-sub{
+  font-size:18px;
+  color:var(--ink-soft);
+  max-width:46ch;
+  margin-bottom:32px;
+}
+
+.hero-ctas{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn-primary{
+  font-weight:600;
+  font-size:15px;
+  background:var(--ink);
+  color:var(--paper);
+  padding:14px 24px;
+  border-radius:var(--radius);
+  border:none;
+  text-decoration:none;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:transform .15s,background .15s;
+}
+
+.btn-primary:hover{
+  background:var(--navy-deep);
+  transform:translateY(-1px);
+}
+
+.btn-ghost{
+  font-weight:600;
+  font-size:15px;
+  background:transparent;
+  color:var(--ink);
+  padding:14px 22px;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.btn-ghost:hover{
+  border-color:var(--ink);
+  background:rgba(25,30,54,.04);
+}
+
+.hero-visual{
+  position:relative;
+}
+
+.hero-visual svg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+.path-line{
+  fill:none;
+  stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-dasharray:400;
+  stroke-dashoffset:400;
+  animation:draw 1.6s ease-out forwards;
+}
+
+.path-line.d1{animation-delay:.15s}
+.path-line.d2{animation-delay:.35s}
+.path-line.d3{animation-delay:.55s}
+.path-line.d4{animation-delay:.75s}
+
+@keyframes draw{
+  to{stroke-dashoffset:0}
+}
+
+.path-node{
+  opacity:0;
+  animation:fadein .5s ease-out forwards;
+}
+
+.path-node.n1{animation-delay:1.4s}
+.path-node.n2{animation-delay:1.55s}
+.path-node.n3{animation-delay:1.7s}
+.path-node.n4{animation-delay:1.85s}
+
+@keyframes fadein{
+  to{opacity:1}
+}
+
+.path-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  fill:var(--ink-soft);
+  opacity:0;
+  animation:fadein .5s ease-out forwards;
+}
+
+.path-label.n1{animation-delay:1.5s}
+.path-label.n2{animation-delay:1.65s}
+.path-label.n3{animation-delay:1.8s}
+.path-label.n4{animation-delay:1.95s}
+
+@media(max-width:860px){
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:56px 0 40px;
+  }
+}
+
+/* GENERAL SECTIONS */
+
+section{
+  padding:88px 0;
+}
+
+.section-head{
+  max-width:640px;
+  margin-bottom:48px;
+}
+
+.section-head h2{
+  font-size:clamp(28px,3.4vw,40px);
+  margin-top:14px;
+}
+
+.section-head p{
+  color:var(--ink-soft);
+  font-size:16px;
+  margin-top:14px;
+}
+
+.divider{
+  border:none;
+  border-top:1px solid var(--line);
+  margin:0;
+}
+
+/* PROBLEM */
+
+.problem-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+
+.problem-card{
+  background:var(--paper);
+  padding:32px 28px;
+}
+
+.problem-card .num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--coral);
+  margin-bottom:14px;
+  display:block;
+}
+
+.problem-card h3{
+  font-size:19px;
+  margin-bottom:10px;
+}
+
+.problem-card p{
+  color:var(--ink-soft);
+  font-size:14.5px;
+}
+
+@media(max-width:860px){
+  .problem-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* SOLUTION */
+
+.flow{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  margin-top:8px;
+  overflow-x:auto;
+  padding-bottom:8px;
+}
+
+.flow-step{
+  flex:1 1 0;
+  min-width:180px;
+  padding:24px 22px;
+  border-top:1px solid var(--line);
+}
+
+.flow-step+.flow-step{
+  border-left:1px solid var(--line);
+}
+
+.flow-step .step-index{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:var(--teal);
+  margin-bottom:12px;
+  display:block;
+}
+
+.flow-step h4{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+.flow-step p{
+  font-size:14px;
+  color:var(--ink-soft);
+}
+
+.solution-callouts{
+  margin-top:56px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+}
+
+.callout h4{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.callout p{
+  font-size:14px;
+  color:var(--ink-soft);
+}
+
+.callout .dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--amber);
+  margin-bottom:12px;
+}
+
+@media(max-width:860px){
+  .solution-callouts{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:560px){
+  .solution-callouts{
+    grid-template-columns:1fr;
+  }
+}
+
+/* DEMO */
+
+.demo-section{
+  background:var(--navy-deep);
+  color:var(--paper);
+}
+
+.demo-section .section-head p{
+  color:rgba(237,239,245,.68);
+}
+
+.demo-section .section-head h2{
+  color:var(--paper);
+}
+
+.demo-note{
+  font-size:13px;
+  color:rgba(237,239,245,.55);
+  max-width:640px;
+  margin-top:14px;
+  border-left:2px solid var(--amber);
+  padding-left:12px;
+}
+
+.demo-panel{
+  margin-top:40px;
+  background:var(--navy-deep-2);
+  border:1px solid var(--line-dark);
+  border-radius:6px;
+  padding:36px;
+}
+
+.demo-form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:36px;
+}
+
+.field-group{
+  margin-bottom:26px;
+}
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.field-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--amber-soft);
+  margin-bottom:12px;
+  display:block;
+}
+
+.chip-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.chip{
+  font-size:13.5px;
+  padding:9px 14px;
+  border-radius:100px;
+  border:1px solid var(--line-dark);
+  background:transparent;
+  color:rgba(237,239,245,.85);
+  cursor:pointer;
+  transition:all .15s;
+}
+
+.chip:hover{
+  border-color:var(--amber);
+}
+
+.chip.active{
+  background:var(--amber);
+  border-color:var(--amber);
+  color:var(--navy-deep);
+  font-weight:600;
+}
+
+.section-helper{
+  font-size:13px;
+  color:rgba(237,239,245,.55);
+  margin:-4px 0 14px;
+  max-width:55ch;
+}
+
+.followup-container{
+  margin-top:18px;
+  display:none;
+}
+
+.followup-container.show{
+  display:block;
+}
+
+.followup-card{
+  background:rgba(15,19,48,.72);
+  border:1px solid var(--line-dark);
+  border-radius:6px;
+  padding:20px;
+  margin-bottom:14px;
+}
+
+.followup-title{
+  font-family:'Fraunces',serif;
+  font-size:18px;
+  color:var(--paper);
+  margin-bottom:4px;
+}
+
+.followup-subtitle{
+  font-size:12.5px;
+  color:rgba(237,239,245,.5);
+  margin-bottom:18px;
+}
+
+.question{
+  margin-bottom:18px;
+}
+
+.question:last-child{
+  margin-bottom:0;
+}
+
+.question-label{
+  display:block;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  color:var(--amber-soft);
+  margin-bottom:9px;
+}
+
+.option-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.option{
+  font-size:12.5px;
+  padding:7px 11px;
+  border-radius:100px;
+  border:1px solid var(--line-dark);
+  background:transparent;
+  color:rgba(237,239,245,.75);
+  cursor:pointer;
+  transition:.15s;
+}
+
+.option:hover{
+  border-color:var(--amber);
+}
+
+.option.selected{
+  background:var(--amber);
+  border-color:var(--amber);
+  color:var(--navy-deep);
+  font-weight:600;
+}
+
+select,
+input[type=text]{
+  width:100%;
+  padding:12px 14px;
+  font-size:14.5px;
+  background:var(--navy-deep);
+  border:1px solid var(--line-dark);
+  border-radius:4px;
+  color:var(--paper);
+}
+
+select:focus,
+input[type=text]:focus{
+  outline:2px solid var(--amber);
+  outline-offset:1px;
+}
+
+.hint{
+  font-size:12.5px;
+  color:rgba(237,239,245,.45);
+  margin-top:8px;
+}
+
+.demo-submit{
+  font-weight:600;
+  font-size:15px;
+  background:var(--amber);
+  color:var(--navy-deep);
+  padding:14px 26px;
+  border-radius:4px;
+  border:none;
+  cursor:pointer;
+  transition:transform .15s;
+}
+
+.demo-submit:hover{
+  transform:translateY(-1px);
+}
+
+/* RESULTS */
+
+.demo-results{
+  margin-top:36px;
+  padding-top:32px;
+  border-top:1px solid var(--line-dark);
+  display:none;
+}
+
+.demo-results.show{
+  display:block;
+}
+
+.best-fit-banner{
+  background:linear-gradient(
+    135deg,
+    rgba(232,163,61,.12),
+    rgba(46,139,132,.10)
+  );
+  border:1px solid var(--amber);
+  border-radius:6px;
+  padding:26px 28px;
+}
+
+.best-fit-banner .field-label{
+  margin-bottom:8px;
+}
+
+.best-fit-banner .field-label span{
+  text-transform:none;
+  letter-spacing:0;
+  color:rgba(237,239,245,.5);
+  font-family:'Public Sans',sans-serif;
+  font-weight:400;
+}
+
+.best-fit-role{
+  font-family:'Fraunces',serif;
+  font-weight:600;
+  font-size:clamp(24px,3vw,34px);
+  color:var(--paper);
+}
+
+.best-fit-why{
+  margin-top:10px;
+  font-size:14.5px;
+  color:rgba(237,239,245,.7);
+  max-width:65ch;
+}
+
+.results-detail{
+  margin-top:32px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+}
+
+.detail-block h4{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--amber-soft);
+  margin-bottom:14px;
+}
+
+.gap-chip{
+  display:inline-block;
+  font-size:13px;
+  padding:6px 12px;
+  margin:0 8px 8px 0;
+  border-radius:100px;
+  border:1px solid var(--coral);
+  color:var(--coral-soft);
+}
+
+.match-row{
+  margin-bottom:20px;
+}
+
+.match-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+  font-size:14.5px;
+}
+
+.match-top .mname{
+  font-weight:600;
+}
+
+.match-top .mpct{
+  font-family:'IBM Plex Mono',monospace;
+  color:var(--teal-soft);
+}
+
+.bar-track{
+  height:8px;
+  background:rgba(237,239,245,.1);
+  border-radius:100px;
+  overflow:hidden;
+}
+
+.bar-fill{
+  height:100%;
+  background:var(--teal);
+  width:0;
+  border-radius:100px;
+  transition:width 1s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ROADMAP */
+
+.roadmap-wrap{
+  margin-top:40px;
+}
+
+.roadmap-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.roadmap-header h4{
+  font-family:'Fraunces',serif;
+  font-size:20px;
+  color:var(--paper);
+}
+
+.roadmap-progress{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.roadmap-progress span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;
+  color:rgba(237,239,245,.6);
+  white-space:nowrap;
+}
+
+.progress-track{
+  width:120px;
+  height:6px;
+  background:rgba(237,239,245,.12);
+  border-radius:100px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0;
+  background:var(--teal);
+  border-radius:100px;
+  transition:width .5s ease;
+}
+
+.flowchart{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  overflow-x:auto;
+  padding:6px 2px 14px;
+}
+
+.flow-connector{
+  width:32px;
+  height:2px;
+  background:rgba(237,239,245,.16);
+  flex:none;
+  align-self:center;
+}
+
+.flow-connector.done{
+  background:var(--teal);
+}
+
+.flow-node{
+  width:205px;
+  flex:none;
+  text-align:left;
+  cursor:pointer;
+  background:var(--navy-deep);
+  border:1.5px solid var(--line-dark);
+  border-radius:6px;
+  padding:16px 16px 14px;
+  transition:border-color .15s,background .15s,transform .15s;
+  color:inherit;
+}
+
+.flow-node:hover{
+  transform:translateY(-2px);
+  border-color:var(--amber);
+}
+
+.flow-node.done{
+  border-color:var(--teal);
+  background:rgba(46,139,132,.12);
+  cursor:default;
+}
+
+.flow-node.done:hover{
+  transform:none;
+  border-color:var(--teal);
+}
+
+.flow-node .fn-top{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+}
+
+.fn-check{
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  border:1.5px solid rgba(237,239,245,.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+  font-size:12px;
+  color:transparent;
+}
+
+.flow-node.done .fn-check{
+  background:var(--teal);
+  border-color:var(--teal);
+  color:var(--navy-deep);
+  font-weight:700;
+}
+
+.fn-stage{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:rgba(237,239,245,.4);
+}
+
+.flow-node.done .fn-stage{
+  color:var(--teal-soft);
+}
+
+.flow-node h5{
+  font-size:14.5px;
+  font-weight:600;
+  margin:0 0 6px;
+  line-height:1.3;
+}
+
+.flow-node p{
+  font-size:12.5px;
+  color:rgba(237,239,245,.55);
+  line-height:1.4;
+}
+
+.flow-node .fn-skill{
+  display:inline-block;
+  margin-top:10px;
+  font-size:11px;
+  font-family:'IBM Plex Mono',monospace;
+  padding:3px 9px;
+  border-radius:100px;
+  border:1px solid rgba(237,239,245,.2);
+  color:rgba(237,239,245,.55);
+}
+
+.flow-node.done .fn-skill{
+  border-color:var(--teal);
+  color:var(--teal-soft);
+}
+
+.reset-link{
+  margin-top:18px;
+  background:none;
+  border:none;
+  color:rgba(237,239,245,.45);
+  font-size:13px;
+  text-decoration:underline;
+  cursor:pointer;
+  padding:0;
+}
+
+.reset-link:hover{
+  color:rgba(237,239,245,.75);
+}
+
+@media(max-width:860px){
+  .demo-form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .results-detail{
+    grid-template-columns:1fr;
+  }
+
+  .demo-panel{
+    padding:24px;
+  }
+
+  .two-col{
+    grid-template-columns:1fr;
+  }
+}
+
+/* TECH */
+
+.tech-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:36px;
+}
+
+.tech-pill{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+  padding:10px 16px;
+  border:1px solid var(--line);
+  border-radius:4px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.tech-pill .tag{
+  color:var(--ink-soft);
+  font-size:11px;
+  text-transform:uppercase;
+}
+
+/* FEASIBILITY */
+
+.table-wrap{
+  margin-top:36px;
+  border:1px solid var(--line);
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  text-align:left;
+  padding:16px 20px;
+  font-size:14.5px;
+  border-bottom:1px solid var(--line);
+}
+
+th{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--ink-soft);
+  background:var(--paper-2);
+  font-weight:500;
+}
+
+tr:last-child td{
+  border-bottom:none;
+}
+
+td.sol{
+  color:var(--ink-soft);
+}
+
+.feasibility-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+
+.ftag{
+  font-size:13.5px;
+  padding:8px 14px;
+  background:var(--teal-soft);
+  color:var(--navy-deep);
+  border-radius:4px;
+  font-weight:500;
+}
+
+/* IMPACT */
+
+.impact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:56px;
+  align-items:start;
+  margin-top:8px;
+}
+
+.audience-list{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.audience-list li{
+  padding:16px 0;
+  border-bottom:1px solid var(--line);
+  font-size:15.5px;
+  display:flex;
+  gap:14px;
+}
+
+.audience-list li span.mk{
+  color:var(--teal);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:13px;
+}
+
+.benefit-item{
+  margin-bottom:20px;
+}
+
+.benefit-item h4{
+  font-size:15.5px;
+  font-weight:700;
+  color:var(--teal);
+  margin-bottom:4px;
+}
+
+.benefit-item p{
+  font-size:14.5px;
+  color:var(--ink-soft);
+}
+
+@media(max-width:860px){
+  .impact-grid{
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+}
+
+/* FOOTER */
+
+footer{
+  background:var(--navy-deep);
+  color:rgba(237,239,245,.75);
+  padding:64px 0 32px;
+}
+
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:32px;
+  padding-bottom:40px;
+  border-bottom:1px solid var(--line-dark);
+}
+
+footer h3{
+  color:var(--paper);
+  font-size:24px;
+}
+
+.footer-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:28px;
+}
+
+.fmeta-item .flabel{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:rgba(237,239,245,.4);
+  margin-bottom:6px;
+}
+
+.fmeta-item .fval{
+  font-size:14.5px;
+  color:var(--paper);
+  font-weight:500;
+}
+
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  padding-top:24px;
+  font-size:13px;
+  flex-wrap:wrap;
+  gap:12px;
+  color:rgba(237,239,245,.4);
+}
+
+@media(max-width:600px){
+  .wrap{
+    padding:0 20px;
+  }
+
+  section{
+    padding:64px 0;
+  }
+}
+
+    /* Skill category grouping — preserves the existing chip-based UI */
+    .skill-category-list{display:grid;gap:10px;margin-top:14px;}
+    .skill-category{border:1px solid var(--line-dark);border-radius:6px;background:rgba(237,239,245,0.025);overflow:hidden;}
+    .skill-category-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:transparent;border:0;color:var(--paper);padding:13px 15px;font-family:'Public Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-align:left;}
+    .skill-category-toggle:hover{background:rgba(237,239,245,0.045);}
+    .skill-category-toggle .category-count{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(237,239,245,0.45);font-weight:400;margin-left:auto;}
+    .skill-category-toggle .category-chevron{font-size:13px;color:var(--amber);transition:transform .15s;}
+    .skill-category.open .category-chevron{transform:rotate(180deg);}
+    .skill-category-skills{display:none;padding:0 14px 14px;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line-dark);}
+    .skill-category.open .skill-category-skills{display:flex;}
+    .skill-category-skills .chip{margin-top:10px;}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     NAV
+========================================================= -->
+
+<nav>
+  <div class="nav-inner">
+
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 20 20" fill="none">
+        <circle cx="4" cy="16" r="2" fill="#191E36"/>
+        <path d="M4 14 L4 10 Q4 8 6 8 L16 8"
+              stroke="#2E8B84"
+              stroke-width="1.6"
+              fill="none"/>
+        <path d="M4 14 L4 11 Q4 9.5 5.5 9.5 L12 4"
+              stroke="#E8A33D"
+              stroke-width="1.6"
+              fill="none"/>
+        <circle cx="16" cy="8" r="1.6" fill="#2E8B84"/>
+        <circle cx="12" cy="4" r="1.6" fill="#E8A33D"/>
+      </svg>
+
+      Waypoint
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#solution">Solution</a></li>
+      <li><a href="#demo">Try the demo</a></li>
+      <li><a href="#tech">Tech</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+
+    <a href="#demo" class="nav-cta">
+      Try the demo
+    </a>
+
+  </div>
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<header class="hero">
+
+  <div class="wrap hero-grid">
+
+    <div>
+
+      <div class="badge-row">
+        <span class="badge">SIH 2026 · SIH1781</span>
+        <span class="badge">Theme: Smart Education</span>
+        <span class="badge">Team Unethical Hackers</span>
+      </div>
+
+      <h1>
+        One profile. <em>Many</em> possible paths.
+        One that actually fits.
+      </h1>
+
+      <p class="hero-sub">
+        Waypoint reads a student's academics, skills, interests and goals —
+        then builds a personalized career pathway, shows exactly which skills
+        are missing, and updates the plan as the student grows.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#demo" class="btn-primary">
+          Try the live demo →
+        </a>
+
+        <a href="#solution" class="btn-ghost">
+          See how it works
+        </a>
+      </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+      <svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg">
+
+        <path class="path-line d1"
+              d="M40 190 C90 190,100 60,220 60 C300 60,320 60,420 40"
+              stroke="#E8A33D"/>
+
+        <path class="path-line d2"
+              d="M40 190 C90 190,100 140,220 140 C300 140,320 140,420 130"
+              stroke="#2E8B84"/>
+
+        <path class="path-line d3"
+              d="M40 190 C90 190,100 220,220 220 C300 220,320 220,420 230"
+              stroke="#D9634A"/>
+
+        <path class="path-line d4"
+              d="M40 190 C90 190,100 300,220 300 C300 300,320 300,420 330"
+              stroke="#4A5074"/>
+
+        <circle cx="40" cy="190" r="7" fill="#191E36"/>
+
+        <text x="14" y="215"
+              class="path-label"
+              font-family="IBM Plex Mono">
+          You
+        </text>
+
+        <circle class="path-node n1"
+                cx="420" cy="40" r="5"
+                fill="#E8A33D"/>
+
+        <text class="path-label n1"
+              x="330" y="30">
+          Software Dev
+        </text>
+
+        <circle class="path-node n2"
+                cx="420" cy="130" r="5"
+                fill="#2E8B84"/>
+
+        <text class="path-label n2"
+              x="325" y="120">
+          Data &amp; AI
+        </text>
+
+        <circle class="path-node n3"
+                cx="420" cy="230" r="5"
+                fill="#D9634A"/>
+
+        <text class="path-label n3"
+              x="315" y="255">
+          Product / UX
+        </text>
+
+        <circle class="path-node n4"
+                cx="420" cy="330" r="5"
+                fill="#4A5074"/>
+
+        <text class="path-label n4"
+              x="300" y="355">
+          Core Engineering
+        </text>
+
+      </svg>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =========================================================
+     PROBLEM
+========================================================= -->
+
+<section id="problem">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <span class="eyebrow">
+        The problem
+      </span>
+
+      <h2>
+        Career guidance today is generic —
+        and confusion is the default.
+      </h2>
+
+      <p>
+        Most students choose a career path based on peer pressure,
+        incomplete information, or a one-size-fits-all counselling session —
+        not on their own skills, interests and academic strengths.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="problem-grid">
+
+    <div class="problem-card">
+      <span class="num">01</span>
+      <h3>One-size-fits-all advice</h3>
+      <p>
+        Generic counselling doesn't account for an individual's actual
+        skills, interests or academic performance.
+      </p>
+    </div>
+
+    <div class="problem-card">
+      <span class="num">02</span>
+      <h3>No visibility into skill gaps</h3>
+      <p>
+        Students rarely know which specific skills stand between them
+        and the career they want.
+      </p>
+    </div>
+
+    <div class="problem-card">
+      <span class="num">03</span>
+      <h3>Advice that doesn't evolve</h3>
+      <p>
+        Recommendations are given once and never update as the student's
+        skills and progress change.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     SOLUTION
+========================================================= -->
+
+<section id="solution">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <span class="eyebrow">
+        The solution
+      </span>
+
+      <h2>
+        An AI-powered pathway, built around one student at a time.
+      </h2>
+
+      <p>
+        Waypoint analyses a student's interests, skills, goals and academic
+        performance to recommend suitable career pathways — then shows the
+        exact roadmap to close the gap.
+      </p>
+
+    </div>
+
+
+    <div class="flow">
+
+      <div class="flow-step">
+        <span class="step-index">01</span>
+        <h4>User profile</h4>
+        <p>
+          Academics, interests, skills and goals, captured once.
+        </p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-index">02</span>
+        <h4>Skill assessment</h4>
+        <p>
+          Follow-up questions measure actual experience and depth.
+        </p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-index">03</span>
+        <h4>Interest profiling</h4>
+        <p>
+          Interests are separated from existing technical abilities.
+        </p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-index">04</span>
+        <h4>Career matching</h4>
+        <p>
+          Skills, interests and education are combined to rank pathways.
+        </p>
+      </div>
+
+      <div class="flow-step">
+        <span class="step-index">05</span>
+        <h4>Adaptive roadmap</h4>
+        <p>
+          Existing skills are skipped and progress continuously changes the plan.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="solution-callouts">
+
+      <div class="callout">
+        <div class="dot"></div>
+        <h4>Separate skills &amp; interests</h4>
+        <p>
+          Wanting to work in AI doesn't mean already knowing AI.
+        </p>
+      </div>
+
+      <div class="callout">
+        <div class="dot"></div>
+        <h4>Skill depth</h4>
+        <p>
+          Experience, projects, tools and proficiency are captured.
+        </p>
+      </div>
+
+      <div class="callout">
+        <div class="dot"></div>
+        <h4>Adaptive roadmap</h4>
+        <p>
+          Existing capabilities are automatically recognised.
+        </p>
+      </div>
+
+      <div class="callout">
+        <div class="dot"></div>
+        <h4>Explainable output</h4>
+        <p>
+          Students can see why a career was recommended.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     DEMO
+========================================================= -->
+
+<section id="demo" class="demo-section">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <span class="eyebrow on-dark">
+        Try it yourself
+      </span>
+
+      <h2>
+        Build your own pathway.
+      </h2>
+
+      <p>
+        Tell Waypoint about yourself. We'll separate what you
+        <strong>can do</strong> from what you
+        <strong>want to explore</strong>, assess your experience,
+        and build a pathway around both.
+      </p>
+
+      <p class="demo-note">
+        This prototype uses a browser-based recommendation engine.
+        The production architecture can replace this engine with an
+        LLM + career-skill database such as O*NET and ESCO.
+      </p>
+
+    </div>
+
+
+    <div class="demo-panel">
+
+      <div class="demo-form-grid">
+
+        <!-- PROFILE -->
+
+        <div>
+
+          <div class="field-group">
+
+            <span class="field-label">
+              Profile
+            </span>
+
+            <div class="two-col">
+
+              <div>
+                <input
+                  type="text"
+                  id="nameInput"
+                  placeholder="Your name">
+              </div>
+
+              <div>
+                <input
+                  type="text"
+                  inputmode="numeric"
+                  id="ageInput"
+                  placeholder="Age">
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="field-group">
+
+            <span class="field-label">
+              Education qualification
+            </span>
+
+            <select id="educationSelect">
+
+              <option value="0">
+                Class 10
+              </option>
+
+              <option value="1" selected>
+                Class 12
+              </option>
+
+              <option value="2">
+                Diploma
+              </option>
+
+              <option value="3">
+                Undergraduate
+              </option>
+
+              <option value="4">
+                Postgraduate
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field-group">
+
+            <span class="field-label">
+              What's your goal? (optional)
+            </span>
+
+            <input
+              type="text"
+              id="goalInput"
+              placeholder="e.g. Find a career I won't get bored of">
+
+          </div>
+
+
+          <!-- SKILLS -->
+
+          <div class="field-group">
+
+            <span class="field-label">
+              01 · Your skills
+            </span>
+
+            <p class="section-helper">
+              Select skills you already have. Waypoint will ask
+              follow-up questions about your actual experience.
+            </p>
+
+            <div
+              class="chip-grid"
+              id="skillChips">
+            </div>
+
+            <p
+              class="hint"
+              id="skillHint">
+              0 skills selected
+            </p>
+
+            <div
+              id="skillQuestions"
+              class="followup-container">
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- INTERESTS -->
+
+        <div>
+
+          <div class="field-group">
+
+            <span class="field-label">
+              02 · Your interests
+            </span>
+
+            <p class="section-helper">
+              These are areas you are interested in exploring.
+              You don't need prior experience.
+            </p>
+
+            <div
+              class="chip-grid"
+              id="interestChips">
+            </div>
+
+            <p
+              class="hint"
+              id="interestHint">
+              0 interests selected
+            </p>
+
+            <div
+              id="interestQuestions"
+              class="followup-container">
+            </div>
+
+          </div>
+
+
+          <button
+            class="demo-submit"
+            id="generateBtn"
+            type="button">
+
+            Generate my pathway →
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- RESULTS -->
+
+      <div
+        class="demo-results"
+        id="demoResults">
+
+        <div class="best-fit-banner">
+
+          <span class="field-label">
+
+            Best-suited role
+            <span id="bestFitFor"></span>
+
+          </span>
+
+          <div
+            class="best-fit-role"
+            id="bestFitRole">
+            —
+          </div>
+
+          <p
+            class="best-fit-why"
+            id="bestFitWhy">
+          </p>
+
+        </div>
+
+
+        <div
+          class="results-detail">
+
+          <div class="detail-block">
+
+            <h4>
+              Also worth exploring
+            </h4>
+
+            <div id="matchList"></div>
+
+          </div>
+
+
+          <div class="detail-block">
+
+            <h4>
+              Skills still to build
+            </h4>
+
+            <div id="gapChips"></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ROADMAP -->
+
+        <div class="roadmap-wrap">
+
+          <div class="roadmap-header">
+
+            <h4>
+              Your adaptive roadmap
+            </h4>
+
+            <div class="roadmap-progress">
+
+              <span id="progressLabel">
+                0 / 0 steps
+              </span>
+
+              <div class="progress-track">
+
+                <div
+                  class="progress-fill"
+                  id="progressFill"
+                  role="progressbar"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0">
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div
+            class="flowchart"
+            id="flowchart">
+          </div>
+
+
+          <button
+            class="reset-link"
+            id="resetBtn"
+            type="button">
+
+            Reset my progress
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     TECH
+========================================================= -->
+
+<section id="tech">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <span class="eyebrow">
+        Technical approach
+      </span>
+
+      <h2>
+        Built with widely-available tools — no specialized hardware.
+      </h2>
+
+      <p>
+        Student information flows through profiling, career matching,
+        skill-gap analysis and roadmap generation.
+      </p>
+
+    </div>
+
+
+    <div class="tech-strip">
+
+      <div class="tech-pill">
+        <span class="tag">Lang</span>
+        Python · JavaScript
+      </div>
+
+      <div class="tech-pill">
+        <span class="tag">Frontend</span>
+        React.js
+      </div>
+
+      <div class="tech-pill">
+        <span class="tag">Backend</span>
+        FastAPI
+      </div>
+
+      <div class="tech-pill">
+        <span class="tag">Database</span>
+        PostgreSQL
+      </div>
+
+      <div class="tech-pill">
+        <span class="tag">AI/ML</span>
+        LLM + Recommendation Engine
+      </div>
+
+      <div class="tech-pill">
+        <span class="tag">APIs</span>
+        REST
+      </div>
+
+      <div class="tech-pill">
+        <span class="tag">Data</span>
+        O*NET · ESCO
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEASIBILITY
+========================================================= -->
+
+<section id="feasibility">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <span class="eyebrow">
+        Feasibility &amp; viability
+      </span>
+
+      <h2>
+        Software-only, scalable, and built to handle the hard parts.
+      </h2>
+
+    </div>
+
+
+    <div class="feasibility-tags">
+
+      <span class="ftag">
+        No special hardware needed
+      </span>
+
+      <span class="ftag">
+        Existing web + AI/ML frameworks
+      </span>
+
+      <span class="ftag">
+        Scales from individuals to institutions
+      </span>
+
+      <span class="ftag">
+        Modular development
+      </span>
+
+    </div>
+
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Challenge</th>
+            <th>How it's addressed</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>
+              Inaccurate recommendations
+            </td>
+
+            <td class="sol">
+              Structured career and skill data combined with
+              student-specific signals.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Inaccurate self-assessment
+            </td>
+
+            <td class="sol">
+              Skill-specific follow-up questions and project experience.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Changing industry skill needs
+            </td>
+
+            <td class="sol">
+              Regularly updated career and skill data.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Data privacy
+            </td>
+
+            <td class="sol">
+              Secure storage, authentication and minimal data collection.
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Bias in recommendations
+            </td>
+
+            <td class="sol">
+              Recommendations are driven primarily by demonstrated skills,
+              interests and abilities.
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     IMPACT
+========================================================= -->
+
+<section id="impact">
+
+  <div class="wrap">
+
+    <div class="section-head">
+
+      <span class="eyebrow">
+        Impact &amp; benefits
+      </span>
+
+      <h2>
+        From career confusion to an actionable plan.
+      </h2>
+
+    </div>
+
+
+    <div class="impact-grid">
+
+      <div>
+
+        <ul class="audience-list">
+
+          <li>
+            <span class="mk">→</span>
+            School &amp; college students
+          </li>
+
+          <li>
+            <span class="mk">→</span>
+            Students exploring career options
+          </li>
+
+          <li>
+            <span class="mk">→</span>
+            Institutions &amp; career cells
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div>
+
+        <div class="benefit-item">
+
+          <h4>
+            Better career decisions
+          </h4>
+
+          <p>
+            Recommendations built around the student's actual profile.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-item">
+
+          <h4>
+            Personalized guidance
+          </h4>
+
+          <p>
+            A clear, step-by-step career roadmap instead of vague advice.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-item">
+
+          <h4>
+            Skill-gap awareness
+          </h4>
+
+          <p>
+            Students know exactly which skills to develop next.
+          </p>
+
+        </div>
+
+
+        <div class="benefit-item">
+
+          <h4>
+            Improved employability
+          </h4>
+
+          <p>
+            Guidance toward relevant skills and projects that matter.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer id="team">
+
+  <div class="wrap">
+
+    <div class="footer-top">
+
+      <div>
+
+        <h3>
+          Waypoint
+        </h3>
+
+        <p
+          style="
+            margin-top:8px;
+            max-width:38ch;
+            color:rgba(237,239,245,.6);
+            font-size:14.5px;
+          ">
+
+          AI-enhanced career guidance,
+          built for Smart India Hackathon 2026.
+
+        </p>
+
+      </div>
+
+
+      <div class="footer-meta">
+
+        <div class="fmeta-item">
+          <div class="flabel">Team</div>
+          <div class="fval">Unethical Hackers</div>
+        </div>
+
+        <div class="fmeta-item">
+          <div class="flabel">Team ID</div>
+          <div class="fval">186</div>
+        </div>
+
+        <div class="fmeta-item">
+          <div class="flabel">Problem statement</div>
+          <div class="fval">SIH1781</div>
+        </div>
+
+        <div class="fmeta-item">
+          <div class="flabel">Category</div>
+          <div class="fval">Software</div>
+        </div>
+
+        <div class="fmeta-item">
+          <div class="flabel">Theme</div>
+          <div class="fval">Smart Education</div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>
+        © 2026 Waypoint — Team Unethical Hackers
+      </span>
+
+      <span>
+        Smart India Hackathon 2026
+      </span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+(function(){
+  "use strict";
+
+  /* =========================================================
+     WAYPOINT — BROAD CAREER PROFILE ENGINE
+     The visual UI is intentionally unchanged. This script only
+     expands the skill, interest and career intelligence.
+  ========================================================= */
+
+  const SKILLS = {
+    "Python":{
+      questions:[
+        {id:"level",label:"How good are you with Python?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"projects",label:"Have you built anything using Python?",options:["Nothing yet","Small programs","School/college project","Multiple projects"]},
+        {id:"libraries",multi:true,label:"Which Python libraries have you used?",options:["NumPy","Pandas","Matplotlib","Scikit-learn","TensorFlow / PyTorch"]}
+      ]
+    },
+    "React":{questions:[
+      {id:"level",label:"How good are you with React?",options:["Never used it","Beginner","Intermediate","Advanced"]},
+      {id:"projects",label:"Have you built anything with React?",options:["Nothing yet","Small component/project","Website or app","Multiple projects"]},
+      {id:"tools",multi:true,label:"What have you worked with?",options:["Components & props","Hooks","React Router","APIs","State management"]}
+    ]},
+    "TypeScript":{questions:[
+      {id:"level",label:"How comfortable are you with TypeScript?",options:["Never used it","Beginner","Intermediate","Advanced"]},
+      {id:"projects",label:"Have you used TypeScript in a project?",options:["No","Practice exercises","Website/app","Multiple projects"]},
+      {id:"concepts",multi:true,label:"What have you used?",options:["Types & interfaces","Generics","Type narrowing","React + TypeScript","Node + TypeScript"]}
+    ]},
+    "Git / GitHub":{questions:[
+      {id:"level",label:"How comfortable are you with Git/GitHub?",options:["Never used it","Beginner","Intermediate","Advanced"]},
+      {id:"experience",multi:true,label:"What have you done with Git/GitHub?",options:["Clone/push/pull","Branches & merges","Pull requests","Team collaboration","Portfolio repositories"]}
+    ]},
+    "Node.js":{questions:[
+      {id:"level",label:"How comfortable are you with Node.js?",options:["Never used it","Beginner","Intermediate","Advanced"]},
+      {id:"projects",label:"Have you built anything with Node.js?",options:["Nothing yet","Small API","Website/backend","Multiple projects"]},
+      {id:"tools",multi:true,label:"What have you used?",options:["Express","REST APIs","Authentication","Databases","npm"]}
+    ]},
+    "Java":{questions:[
+      {id:"level",label:"How good are you with Java?",options:["Just started","Beginner","Intermediate","Advanced"]},
+      {id:"projects",label:"Have you built anything using Java?",options:["Nothing yet","Small programs","School/college project","Multiple projects"]},
+      {id:"concepts",multi:true,label:"Which Java concepts have you used?",options:["OOP","Collections","Exception Handling","Multithreading","Spring"]}
+    ]},
+    "C++":{questions:[
+      {id:"level",label:"How good are you with C++?",options:["Just started","Beginner","Intermediate","Advanced"]},
+      {id:"projects",label:"Have you built anything using C++?",options:["Nothing yet","Small programs","Academic project","Multiple projects"]},
+      {id:"concepts",multi:true,label:"What have you worked with?",options:["OOP","STL","Pointers","DSA","Competitive Programming"]}
+    ]},
+    "Cloud / DevOps":{questions:[
+      {id:"level",label:"How familiar are you with cloud/DevOps?",options:["Never tried","Beginner","Intermediate","Advanced"]},
+      {id:"tools",multi:true,label:"Which have you explored?",options:["AWS","Azure","Docker","Linux","CI/CD","Kubernetes"]},
+      {id:"projects",label:"Have you deployed anything?",options:["No","Static website","Web app/API","Multiple deployments"]}
+    ]},
+    "C":{
+      questions:[
+        {id:"level",label:"How good are you with C?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"projects",label:"Have you built anything using C?",options:["Nothing yet","Small programs","Academic project","Multiple projects"]},
+        {id:"concepts",multi:true,label:"Which C concepts have you worked with?",options:["Pointers","Structures","File Handling","Dynamic Memory","DSA"]}
+      ]
+    },
+    "C++":{
+      questions:[
+        {id:"level",label:"How good are you with C++?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"projects",label:"Have you built anything using C++?",options:["Nothing yet","Small programs","Academic project","Multiple projects"]},
+        {id:"concepts",multi:true,label:"What have you worked with?",options:["OOP","STL","Pointers","DSA","Competitive Programming"]}
+      ]
+    },
+    "Java":{
+      questions:[
+        {id:"level",label:"How good are you with Java?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"projects",label:"Have you built anything using Java?",options:["Nothing yet","Small programs","Academic project","Multiple projects"]},
+        {id:"concepts",multi:true,label:"Which Java concepts have you used?",options:["OOP","Collections","Exception Handling","Multithreading","Spring"]}
+      ]
+    },
+    "JavaScript":{
+      questions:[
+        {id:"level",label:"How good are you with JavaScript?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"projects",label:"Have you built anything using JavaScript?",options:["Nothing yet","Small projects","Websites","Multiple projects"]},
+        {id:"tools",multi:true,label:"What have you worked with?",options:["DOM","APIs","React","Node.js","Express"]}
+      ]
+    },
+    "HTML/CSS":{
+      questions:[
+        {id:"level",label:"How comfortable are you with HTML/CSS?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"projects",label:"Have you built websites?",options:["No","Basic websites","Responsive websites","Multiple websites"]},
+        {id:"tools",multi:true,label:"What have you worked with?",options:["Responsive Design","Flexbox","CSS Grid","Animations","Tailwind"]}
+      ]
+    },
+    "SQL":{
+      questions:[
+        {id:"level",label:"How good are you with SQL?",options:["Just started","Beginner","Intermediate","Advanced"]},
+        {id:"experience",multi:true,label:"What have you worked with?",options:["SELECT queries","JOINs","Aggregation","Subqueries","Database projects"]}
+      ]
+    },
+    "Arduino / Microcontrollers":{
+      questions:[
+        {id:"level",label:"How comfortable are you with microcontrollers?",options:["Never tried","Beginner","Intermediate","Advanced"]},
+        {id:"projects",multi:true,label:"What have you built or tried?",options:["LED/sensor projects","Arduino","ESP32/ESP8266","IoT project","Robotics project"]}
+      ]
+    },
+    "Electronics & Circuits":{
+      questions:[
+        {id:"level",label:"How comfortable are you with electronics?",options:["School-level","Beginner","Intermediate","Advanced"]},
+        {id:"experience",multi:true,label:"What have you worked with?",options:["Basic circuits","Breadboards","Sensors","Digital electronics","PCB/circuit design"]}
+      ]
+    },
+    "CAD / 3D Modelling":{
+      questions:[
+        {id:"level",label:"How comfortable are you with CAD or 3D modelling?",options:["Never used it","Beginner","Intermediate","Advanced"]},
+        {id:"tools",multi:true,label:"Which tools have you used?",options:["AutoCAD","SolidWorks","Fusion 360","CATIA","Blender"]},
+        {id:"projects",label:"Have you made models/drawings?",options:["No","Practice models","Academic projects","Real/portfolio projects"]}
+      ]
+    },
+    "Mathematics":{
+      questions:[
+        {id:"level",label:"How comfortable are you with mathematics?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"areas",multi:true,label:"Which areas are you comfortable with?",options:["Algebra","Calculus","Probability","Statistics","Geometry","Trigonometry","Linear Algebra"]}
+      ]
+    },
+    "Physics":{
+      questions:[
+        {id:"level",label:"How comfortable are you with physics?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"areas",multi:true,label:"Which areas interest or suit you?",options:["Mechanics","Electricity & Magnetism","Optics","Thermodynamics","Modern Physics"]}
+      ]
+    },
+    "Chemistry":{
+      questions:[
+        {id:"level",label:"How comfortable are you with chemistry?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"areas",multi:true,label:"Which areas do you enjoy?",options:["Organic","Inorganic","Physical Chemistry","Lab Work","Environmental Chemistry"]}
+      ]
+    },
+    "Biology & Life Science":{
+      questions:[
+        {id:"level",label:"How comfortable are you with biology?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"areas",multi:true,label:"Which areas interest you?",options:["Human Biology","Genetics","Ecology","Microbiology","Anatomy"]}
+      ]
+    },
+    "Statistics":{
+      questions:[
+        {id:"level",label:"How good are you with statistics?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"experience",multi:true,label:"Have you applied statistics?",options:["Not yet","Academic work","Real datasets","Projects","Surveys"]}
+      ]
+    },
+    "Problem Solving":{
+      questions:[
+        {id:"level",label:"How would you rate your problem-solving ability?",options:["Developing","Good","Strong","Very strong"]},
+        {id:"experience",multi:true,label:"Where have you practiced it?",options:["Coding","Mathematics","Projects","Competitions","Real-life problems"]}
+      ]
+    },
+    "Communication":{
+      questions:[
+        {id:"level",label:"How comfortable are you communicating ideas?",options:["Developing","Good","Very strong","Excellent"]},
+        {id:"experience",multi:true,label:"Where have you practiced communication?",options:["Presentations","Team projects","Public speaking","Leadership","Events"]}
+      ]
+    },
+    "Public Speaking":{
+      questions:[
+        {id:"level",label:"How comfortable are you speaking to an audience?",options:["Nervous","Developing","Comfortable","Very confident"]},
+        {id:"experience",multi:true,label:"Where have you spoken publicly?",options:["Class presentations","Debates","Competitions","Events","Anchoring/hosting"]}
+      ]
+    },
+    "Writing":{
+      questions:[
+        {id:"level",label:"How would you rate your writing?",options:["Developing","Good","Strong","Very strong"]},
+        {id:"experience",multi:true,label:"What kind of writing have you done?",options:["Academic","Creative","Technical","Articles / blogs","Scripts / stories"]}
+      ]
+    },
+    "Creativity":{
+      questions:[
+        {id:"level",label:"How strongly do you identify with creativity?",options:["Developing","Good","Very strong","Highly creative"]},
+        {id:"experience",multi:true,label:"What have you created?",options:["Personal projects","Designs","Content","Portfolio work","Stories/music/films"]}
+      ]
+    },
+    "Visual Design":{
+      questions:[
+        {id:"level",label:"How comfortable are you with visual design?",options:["Beginner","Intermediate","Advanced","Very strong"]},
+        {id:"tools",multi:true,label:"Which tools have you used?",options:["Canva","Figma","Adobe","Photoshop","Illustrator","Other design tools"]}
+      ]
+    },
+    "Video Editing":{
+      questions:[
+        {id:"level",label:"How comfortable are you with video editing?",options:["Never tried","Beginner","Intermediate","Advanced"]},
+        {id:"tools",multi:true,label:"Which tools have you used?",options:["CapCut","Premiere Pro","DaVinci Resolve","After Effects","Mobile editing apps"]},
+        {id:"projects",label:"Have you edited anything?",options:["Nothing yet","Short clips","School/social media videos","Multiple projects"]}
+      ]
+    },
+    "Photography":{
+      questions:[
+        {id:"level",label:"How comfortable are you with photography?",options:["Just exploring","Beginner","Intermediate","Advanced"]},
+        {id:"experience",multi:true,label:"What do you photograph?",options:["People","Events","Nature","Products","Street/Documentary"]}
+      ]
+    },
+    "Research":{
+      questions:[
+        {id:"experience",label:"How much research experience do you have?",options:["Not yet","School assignments","Independent project","Research project","Published/competitive work"]},
+        {id:"methods",multi:true,label:"What have you done?",options:["Finding sources","Surveys","Experiments","Data analysis","Literature review"]}
+      ]
+    },
+    "Leadership":{
+      questions:[
+        {id:"experience",label:"How much leadership experience do you have?",options:["None yet","Small teams","Clubs/projects","Significant responsibility"]},
+        {id:"contexts",multi:true,label:"Where have you led?",options:["School/college","Sports","Clubs","Events","Projects","Community work"]}
+      ]
+    },
+    "Teamwork":{
+      questions:[
+        {id:"level",label:"How comfortable are you working in a team?",options:["Developing","Good","Very good","Excellent"]},
+        {id:"experience",multi:true,label:"Where have you worked in teams?",options:["Class projects","Sports","Clubs","Competitions","Events","Work/internship"]}
+      ]
+    },
+    "Business Acumen":{
+      questions:[
+        {id:"level",label:"How comfortable are you with basic business concepts?",options:["New to it","Beginner","Good","Strong"]},
+        {id:"experience",multi:true,label:"What have you explored?",options:["Business ideas","Selling","Marketing","Finance","Entrepreneurship","School/college business project"]}
+      ]
+    },
+    "Accounting / Commerce":{
+      questions:[
+        {id:"level",label:"How comfortable are you with accounting/commerce?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"experience",multi:true,label:"What have you worked with?",options:["Journal/ledger","Financial statements","Tally/accounting software","Excel","Business case studies"]}
+      ]
+    },
+    "Economics":{
+      questions:[
+        {id:"level",label:"How comfortable are you with economics?",options:["Basic","Intermediate","Advanced","Very strong"]},
+        {id:"areas",multi:true,label:"Which areas interest you?",options:["Microeconomics","Macroeconomics","Markets","Development","Public policy"]}
+      ]
+    },
+    "Legal Reasoning":{
+      questions:[
+        {id:"level",label:"How comfortable are you with legal reasoning?",options:["New to it","Developing","Good","Strong"]},
+        {id:"experience",multi:true,label:"Where have you practiced it?",options:["Debates","Case analysis","Moot/debate competitions","Reading laws","Policy discussions"]}
+      ]
+    },
+    "Debate & Argumentation":{
+      questions:[
+        {id:"level",label:"How comfortable are you building an argument?",options:["Developing","Good","Strong","Very strong"]},
+        {id:"experience",multi:true,label:"Where have you practiced?",options:["Debates","Model UN","Public speaking","Competitions","Class discussions"]}
+      ]
+    },
+    "Empathy":{
+      questions:[
+        {id:"level",label:"How would you describe your ability to understand others?",options:["Developing","Good","Strong","Very strong"]},
+        {id:"experience",multi:true,label:"Where do you use this skill?",options:["Helping friends","Teamwork","Volunteering","Teaching","Community activities"]}
+      ]
+    },
+    "Teaching / Explaining":{
+      questions:[
+        {id:"level",label:"How comfortable are you explaining concepts to others?",options:["Developing","Good","Strong","Very strong"]},
+        {id:"experience",multi:true,label:"Have you taught or mentored anyone?",options:["Friends/classmates","Juniors","Tutoring","Workshops","Online content"]}
+      ]
+    },
+    "Cooking":{
+      questions:[
+        {id:"level",label:"How comfortable are you with cooking?",options:["Beginner","Comfortable at home","Good","Advanced"]},
+        {id:"experience",multi:true,label:"What have you tried?",options:["Indian cuisine","Baking","International cuisine","Plating","Large/event cooking"]}
+      ]
+    },
+    "Basic Computer Skills":{
+      questions:[
+        {id:"level",label:"How comfortable are you with computers?",options:["Basic","Comfortable","Good","Very confident"]},
+        {id:"tools",multi:true,label:"What can you use?",options:["Word/Docs","PowerPoint/Slides","Excel/Sheets","Email","Online research","File management"]}
+      ]
+    },
+    "Excel / Spreadsheets":{
+      questions:[
+        {id:"level",label:"How comfortable are you with Excel/spreadsheets?",options:["Beginner","Intermediate","Advanced","Very strong"]},
+        {id:"tools",multi:true,label:"What have you used?",options:["Formulas","Charts","Pivot tables","Data cleaning","Dashboards"]}
+      ]
+    },
+    "Attention to Detail":{
+      questions:[
+        {id:"level",label:"How strong is your attention to detail?",options:["Developing","Good","Strong","Very strong"]},
+        {id:"experience",multi:true,label:"Where do you use it?",options:["Academic work","Coding","Design","Lab work","Organising events/documents"]}
+      ]
+    },
+    "Drawing / Sketching":{
+      questions:[
+        {id:"level",label:"How comfortable are you with drawing/sketching?",options:["Beginner","Intermediate","Advanced","Very strong"]},
+        {id:"experience",multi:true,label:"What do you draw?",options:["Sketches","Technical drawings","Portraits","Digital art","Concept art"]}
+      ]
+    },
+    "Organisation":{
+      questions:[
+        {id:"level",label:"How organised are you?",options:["Developing","Good","Very organised","Excellent"]},
+        {id:"experience",multi:true,label:"Where do you apply it?",options:["Study planning","Events","Projects","Teams","Personal schedules"]}
+      ]
+    }
+  };
+
+  const INTERESTS = {
+    "Computer Science & IT":["Software development","AI / machine learning","Cybersecurity","Cloud / DevOps","Apps & web"],
+    "Electronics & Communication (ECE)":["Circuits","Embedded systems","Communication systems","VLSI / chips","IoT"],
+    "Electronics & Computer Engineering (ECM)":["Embedded computing","IoT","Robotics","Programming + electronics","Computer architecture"],
+    "Electrical Engineering":["Power systems","Renewable energy","Control systems","Electrical machines","Smart grids"],
+    "Mechanical Engineering":["Machines","Automotive","Thermal systems","Manufacturing","CAD / product design"],
+    "Civil Engineering":["Buildings","Structural engineering","Transportation","Construction","Water/environment"],
+    "Mechatronics":["Automation","Robotics","Sensors","Control systems","Smart machines"],
+    "Robotics":["Robot design","Autonomous systems","Computer vision","Control","Drones"],
+    "Data & AI":["Data science","Machine learning","Generative AI","Analytics","Research"],
+    "Design & UX":["UI design","UX research","Product design","Visual design","Branding"],
+    "Business & Management":["Management","Strategy","Operations","Entrepreneurship","Leadership"],
+    "BBA / Business Administration":["Marketing","HR","Finance","Operations","Entrepreneurship"],
+    "Finance & Accounting":["Accounting","Investment","Banking","Financial analysis","Markets"],
+    "Marketing & Advertising":["Branding","Digital marketing","Advertising","Consumer behaviour","Content"],
+    "Human Resources":["Recruitment","People management","Training","Organisational psychology","Employee experience"],
+    "Law":["Corporate law","Criminal law","Constitutional law","Litigation","Legal research"],
+    "UPSC / Civil Services":["Public administration","Governance","Current affairs","International relations","Social issues"],
+    "Psychology":["Counselling","Clinical psychology","Organisational psychology","Cognitive science","Child psychology"],
+    "Humanities & Social Sciences":["History","Political science","Sociology","Philosophy","Anthropology"],
+    "Literature & Languages":["Literature","Creative writing","Languages","Publishing","Criticism"],
+    "Journalism & Media":["Reporting","Investigative journalism","Broadcasting","Digital media","Documentaries"],
+    "Film & Filmmaking":["Direction","Screenwriting","Cinematography","Editing","Production"],
+    "Photography & Visual Storytelling":["Portraits","Fashion photography","Documentary","Commercial photography","Travel"],
+    "Animation & Games":["2D animation","3D animation","Game design","Character art","VFX"],
+    "Architecture & Built Environment":["Architecture","Urban planning","Interior spaces","Sustainable buildings","Landscape"],
+    "Medicine & Healthcare":["Medicine","Nursing","Pharmacy","Allied health","Medical research"],
+    "Biology & Biotechnology":["Genetics","Microbiology","Biotech","Ecology","Biomedical science"],
+    "Pure Science & Research":["Physics","Chemistry","Mathematics","Scientific research","Academia"],
+    "Education & Teaching":["School teaching","Higher education","Tutoring","Educational technology","Special education"],
+    "Culinary Arts & Chef Careers":["Cooking","Baking","Restaurant kitchens","Food styling","Food business"],
+    "Hospitality & Tourism":["Hotels","Events","Travel","Guest experience","Hospitality management"],
+    "Fashion & Textiles":["Fashion design","Styling","Textiles","Merchandising","Costume design"],
+    "Environment & Sustainability":["Climate","Renewable energy","Conservation","Sustainability","Environmental policy"],
+    "Agriculture & Food Science":["Agriculture","Agri-tech","Food science","Horticulture","Animal science"]
+  };
+
+  /* Career skills are intentionally broad. Education is a feasibility
+     signal, not a hard exclusion, so Class 12 students can still see
+     exploratory paths and understand what comes next. */
+  const CAREERS = [
+    {name:"Software Development",education:1,skills:{"Python":2,"JavaScript":2,"Problem Solving":3,"Basic Computer Skills":1},interests:["Computer Science & IT","Data & AI"],roadmap:[
+      ["Programming fundamentals","Learn one language deeply: syntax, logic, functions and debugging.","Python"],
+      ["Problem solving & DSA","Practice structured problem solving, algorithms and data structures.","Problem Solving"],
+      ["Build real applications","Create 2–3 projects that solve real problems.","JavaScript"],
+      ["Learn Git & collaboration","Use GitHub and document your work.","Basic Computer Skills"],
+      ["Portfolio & internship","Turn projects into a portfolio and seek real-world experience.","Portfolio"]]},
+    {name:"AI / Machine Learning",education:2,skills:{"Python":3,"Mathematics":2,"Statistics":3,"Problem Solving":2,"Research":1},interests:["Data & AI","Pure Science & Research"],roadmap:[
+      ["Strengthen Python","Become comfortable writing clean Python for data work.","Python"],
+      ["Learn statistics","Probability, distributions and inference.","Statistics"],
+      ["Build mathematical foundations","Linear algebra, calculus and optimisation intuition.","Mathematics"],
+      ["Explore ML with real data","Use NumPy, Pandas, visualisation and a model.","Research"],
+      ["Ship an ML project","Complete and explain an end-to-end case study.","Portfolio"]]},
+    {name:"Cybersecurity",education:1,skills:{"Python":2,"C":1,"Problem Solving":3,"Basic Computer Skills":2,"Attention to Detail":2},interests:["Computer Science & IT"],roadmap:[
+      ["Networking fundamentals","Learn how devices, networks, HTTP and DNS work.","Basic Computer Skills"],
+      ["Security scripting","Automate simple security tasks with Python.","Python"],
+      ["Practice ethical security labs","Use legal CTFs and beginner security labs.","Problem Solving"],
+      ["Learn to inspect details","Logs, configurations and edge cases matter.","Attention to Detail"],
+      ["Build a security portfolio","Document labs, projects and responsible findings.","Portfolio"]]},
+    {name:"Data Analytics",education:1,skills:{"Mathematics":2,"Statistics":3,"Excel / Spreadsheets":2,"Python":2,"Communication":2},interests:["Data & AI","Business & Management","Finance & Accounting"],roadmap:[
+      ["Master spreadsheets","Formulas, charts, cleaning and dashboards.","Excel / Spreadsheets"],
+      ["Learn statistics","Use data to answer questions rather than guess.","Statistics"],
+      ["Learn Python for data","Use Pandas and visualisation on real datasets.","Python"],
+      ["Explain insights","Turn analysis into clear recommendations.","Communication"],
+      ["Build an analytics portfolio","Publish a few end-to-end case studies.","Portfolio"]]},
+    {name:"ECE / Electronics Engineering",education:1,skills:{"Physics":3,"Mathematics":2,"Electronics & Circuits":3,"Problem Solving":2,"Attention to Detail":2},interests:["Electronics & Communication (ECE)"],roadmap:[
+      ["Strengthen physics & math","Build the foundations used in electronics.","Physics"],
+      ["Learn circuit fundamentals","Components, voltage, current, digital logic and measurement.","Electronics & Circuits"],
+      ["Try embedded systems","Use Arduino/ESP32 and basic sensors.","Arduino / Microcontrollers"],
+      ["Build an electronics project","Make and document a working prototype.","Problem Solving"],
+      ["Explore ECE specialisations","Compare VLSI, communications, embedded and IoT.","Research"]]},
+    {name:"ECM / Electronics & Computer Engineering",education:1,skills:{"Electronics & Circuits":2,"Python":2,"C":2,"Problem Solving":3,"Arduino / Microcontrollers":2},interests:["Electronics & Computer Engineering (ECM)"],roadmap:[
+      ["Learn programming basics","Build confidence with C/Python and computational thinking.","Python"],
+      ["Understand circuits","Digital and analogue electronics fundamentals.","Electronics & Circuits"],
+      ["Learn microcontrollers","Connect code, sensors and hardware.","Arduino / Microcontrollers"],
+      ["Build an embedded project","Combine hardware and software into one system.","Problem Solving"],
+      ["Explore IoT / embedded careers","Document the project and choose a specialisation.","Portfolio"]]},
+    {name:"Electrical Engineering",education:1,skills:{"Physics":3,"Mathematics":2,"Electronics & Circuits":2,"Problem Solving":2,"Attention to Detail":2},interests:["Electrical Engineering","Environment & Sustainability"],roadmap:[
+      ["Strengthen electrical physics","Electricity, magnetism and circuit fundamentals.","Physics"],
+      ["Learn circuit analysis","Understand components, measurements and systems.","Electronics & Circuits"],
+      ["Explore power & machines","Motors, generators, grids and energy systems.","Mathematics"],
+      ["Try a hands-on project","Build or simulate an electrical system.","Problem Solving"],
+      ["Explore modern energy","Renewables, smart grids and automation.","Research"]]},
+    {name:"Mechanical Engineering",education:1,skills:{"Physics":3,"Mathematics":2,"CAD / 3D Modelling":2,"Problem Solving":3,"Attention to Detail":2},interests:["Mechanical Engineering"],roadmap:[
+      ["Strengthen mechanics","Forces, motion, energy and material behaviour.","Physics"],
+      ["Learn CAD","Create accurate 2D/3D parts and assemblies.","CAD / 3D Modelling"],
+      ["Build a hands-on project","Design, prototype or analyse a mechanism.","Problem Solving"],
+      ["Explore manufacturing","Understand materials, processes and quality.","Attention to Detail"],
+      ["Choose a specialisation","Automotive, thermal, manufacturing, design or aerospace.","Research"]]},
+    {name:"Civil Engineering",education:1,skills:{"Mathematics":2,"Physics":2,"CAD / 3D Modelling":2,"Problem Solving":2,"Attention to Detail":3},interests:["Civil Engineering","Architecture & Built Environment"],roadmap:[
+      ["Strengthen math & physics","Build quantitative foundations for engineering.","Mathematics"],
+      ["Learn technical drawing/CAD","Read and create plans accurately.","CAD / 3D Modelling"],
+      ["Explore structures & materials","Understand loads, materials and construction.","Physics"],
+      ["Do a site/design project","Apply engineering thinking to a real problem.","Problem Solving"],
+      ["Explore civil specialisations","Structures, transport, water, geotech and construction.","Research"]]},
+    {name:"Mechatronics Engineering",education:1,skills:{"Physics":3,"Mathematics":2,"Electronics & Circuits":2,"Arduino / Microcontrollers":2,"Problem Solving":3},interests:["Mechatronics","Robotics"],roadmap:[
+      ["Build physics foundations","Mechanics, electricity and control concepts.","Physics"],
+      ["Learn electronics","Sensors, circuits and actuators.","Electronics & Circuits"],
+      ["Program microcontrollers","Connect hardware with code.","Arduino / Microcontrollers"],
+      ["Build an automated system","Combine sensing, control and movement.","Problem Solving"],
+      ["Explore automation","Robotics, industrial automation and smart machines.","Research"]]},
+    {name:"Robotics Engineering",education:1,skills:{"Python":2,"C++":2,"Physics":2,"Mathematics":2,"Arduino / Microcontrollers":3,"Problem Solving":3},interests:["Robotics","Mechatronics"],roadmap:[
+      ["Learn programming for robots","Use Python/C++ and computational thinking.","Python"],
+      ["Learn electronics & sensors","Understand how robots perceive the world.","Arduino / Microcontrollers"],
+      ["Study mechanics","Movement, forces and actuators.","Physics"],
+      ["Build a robot prototype","Combine code, sensors and hardware.","Problem Solving"],
+      ["Explore autonomy","Computer vision, control and navigation.","Research"]]},
+    {name:"BBA / Business Administration",education:1,skills:{"Communication":2,"Business Acumen":3,"Leadership":2,"Basic Computer Skills":1,"Problem Solving":2},interests:["BBA / Business Administration","Business & Management"],roadmap:[
+      ["Understand business basics","Operations, finance, marketing and strategy.","Business Acumen"],
+      ["Strengthen communication","Present ideas and write clearly.","Communication"],
+      ["Lead a small project","Take responsibility for a team or event.","Leadership"],
+      ["Learn business analytics","Use spreadsheets and evidence for decisions.","Basic Computer Skills"],
+      ["Get real exposure","Intern, volunteer or build a small venture.","Portfolio"]]},
+    {name:"Marketing & Advertising",education:1,skills:{"Communication":3,"Creativity":3,"Writing":2,"Business Acumen":2,"Statistics":1},interests:["Marketing & Advertising","BBA / Business Administration","Film & Filmmaking"],roadmap:[
+      ["Learn marketing fundamentals","Audience, positioning, funnels and branding.","Business Acumen"],
+      ["Create content","Develop ideas for a real audience.","Creativity"],
+      ["Write persuasive copy","Headlines, campaigns and clear messaging.","Writing"],
+      ["Measure campaigns","Learn basic analytics and consumer behaviour.","Statistics"],
+      ["Build a campaign portfolio","Show campaigns and measurable outcomes.","Portfolio"]]},
+    {name:"Finance & Accounting",education:1,skills:{"Accounting / Commerce":3,"Mathematics":2,"Excel / Spreadsheets":3,"Attention to Detail":3,"Economics":2},interests:["Finance & Accounting","BBA / Business Administration"],roadmap:[
+      ["Build accounting foundations","Understand ledgers, statements and basic accounting.","Accounting / Commerce"],
+      ["Strengthen quantitative skills","Comfort with numbers and financial reasoning.","Mathematics"],
+      ["Master spreadsheets","Build financial models and reports.","Excel / Spreadsheets"],
+      ["Understand economics & markets","Connect numbers to real decisions.","Economics"],
+      ["Build a finance case study","Analyse a company, budget or investment scenario.","Portfolio"]]},
+    {name:"Human Resources",education:1,skills:{"Communication":3,"Empathy":3,"Leadership":2,"Organisation":2,"Writing":2},interests:["Human Resources","BBA / Business Administration","Psychology"],roadmap:[
+      ["Understand people at work","Learn basic organisational behaviour.","Empathy"],
+      ["Strengthen communication","Practice interviews, presentations and feedback.","Communication"],
+      ["Learn HR processes","Recruitment, onboarding, training and policies.","Organisation"],
+      ["Practice leadership","Coordinate a team or project.","Leadership"],
+      ["Build an HR portfolio","Create a sample hiring/training project.","Portfolio"]]},
+    {name:"Entrepreneurship",education:1,skills:{"Business Acumen":3,"Communication":2,"Creativity":3,"Problem Solving":3,"Leadership":2},interests:["Business & Management","BBA / Business Administration"],roadmap:[
+      ["Find a real problem","Interview people and identify a useful need.","Problem Solving"],
+      ["Develop a business idea","Think about value, customer and competition.","Creativity"],
+      ["Learn business fundamentals","Pricing, costs, marketing and operations.","Business Acumen"],
+      ["Pitch your idea","Explain the problem and solution clearly.","Communication"],
+      ["Build a small MVP","Test the idea with real users.","Leadership"]]},
+    {name:"Law",education:3,skills:{"Legal Reasoning":3,"Writing":3,"Debate & Argumentation":3,"Research":3,"Communication":2},interests:["Law","UPSC / Civil Services","Humanities & Social Sciences"],roadmap:[
+      ["Build reasoning skills","Learn to identify facts, rules and arguments.","Legal Reasoning"],
+      ["Research deeply","Read cases, laws and credible sources.","Research"],
+      ["Write clearly","Practise structured legal and analytical writing.","Writing"],
+      ["Practise advocacy","Debate, moot court or public argument.","Debate & Argumentation"],
+      ["Explore legal internships","Gain exposure to real legal environments.","Portfolio"]]},
+    {name:"UPSC / Civil Services",education:1,skills:{"Writing":3,"Research":3,"Public Speaking":2,"Debate & Argumentation":2,"Current Affairs":1,"Organisation":3},interests:["UPSC / Civil Services","Law","Humanities & Social Sciences"],roadmap:[
+      ["Build reading discipline","Create a sustainable study and current-affairs routine.","Organisation"],
+      ["Strengthen research","Learn to compare sources and understand policy.","Research"],
+      ["Practise answer writing","Write structured, evidence-based answers.","Writing"],
+      ["Develop discussion skills","Debate public issues and explain your position.","Debate & Argumentation"],
+      ["Explore the exam pathway","Understand eligibility, stages and optional subjects.","Portfolio"]]},
+    {name:"Psychology",education:1,skills:{"Empathy":3,"Research":2,"Communication":3,"Biology & Life Science":1,"Writing":2},interests:["Psychology","Medicine & Healthcare","Humanities & Social Sciences"],roadmap:[
+      ["Learn psychology foundations","Understand behaviour, cognition and development.","Research"],
+      ["Build empathy & listening","Practise respectful, non-judgmental communication.","Empathy"],
+      ["Learn research methods","Understand evidence, surveys and experiments.","Research"],
+      ["Strengthen communication","Explain ideas clearly and responsibly.","Communication"],
+      ["Explore specialisations","Clinical, counselling, organisational, educational or research paths.","Portfolio"]]},
+    {name:"Humanities & Social Sciences",education:1,skills:{"Writing":3,"Research":3,"Communication":2,"Debate & Argumentation":2,"Empathy":2},interests:["Humanities & Social Sciences","UPSC / Civil Services","Literature & Languages"],roadmap:[
+      ["Choose questions that matter","Explore society, culture, politics, history or ideas.","Research"],
+      ["Read widely","Compare books, papers and credible sources.","Writing"],
+      ["Build arguments","Discuss issues using evidence rather than assumptions.","Debate & Argumentation"],
+      ["Write analytical pieces","Essays, articles or research notes.","Communication"],
+      ["Explore pathways","Policy, academia, law, media, civil services and education.","Portfolio"]]},
+    {name:"Literature & Creative Writing",education:1,skills:{"Writing":3,"Creativity":3,"Research":2,"Communication":2},interests:["Literature & Languages","Humanities & Social Sciences"],roadmap:[
+      ["Read deeply","Explore different genres, authors and literary traditions.","Research"],
+      ["Write regularly","Build a consistent creative writing practice.","Writing"],
+      ["Develop your voice","Experiment with form, style and storytelling.","Creativity"],
+      ["Share your work","Workshops, publications, readings or online portfolios.","Communication"],
+      ["Build a writing portfolio","Collect your strongest work and explore publishing.","Portfolio"]]},
+    {name:"Journalism & Media",education:1,skills:{"Writing":3,"Research":3,"Communication":3,"Public Speaking":2,"Attention to Detail":2},interests:["Journalism & Media","Media & Communication","UPSC / Civil Services"],roadmap:[
+      ["Learn reporting basics","Facts, sources, verification and responsible reporting.","Research"],
+      ["Write news and features","Practise concise and engaging writing.","Writing"],
+      ["Interview people","Ask good questions and listen carefully.","Communication"],
+      ["Try audio/video reporting","Learn basic production and presentation.","Public Speaking"],
+      ["Build a published portfolio","Create a body of credible work.","Portfolio"]]},
+    {name:"Film & Filmmaking",education:1,skills:{"Creativity":3,"Video Editing":3,"Writing":2,"Communication":2,"Visual Design":2},interests:["Film & Filmmaking","Photography & Visual Storytelling","Literature & Languages"],roadmap:[
+      ["Learn visual storytelling","Shots, composition, pacing and visual language.","Visual Design"],
+      ["Write a short script","Turn an idea into a scene-by-scene story.","Writing"],
+      ["Shoot a short film","Work with available equipment and real locations.","Creativity"],
+      ["Edit your film","Learn pacing, sound and basic colour work.","Video Editing"],
+      ["Build a showreel","Collect your strongest work and collaborate on productions.","Portfolio"]]},
+    {name:"Photography & Visual Storytelling",education:1,skills:{"Photography":2,"Visual Design":3,"Creativity":3,"Attention to Detail":2},interests:["Photography & Visual Storytelling","Film & Filmmaking"],roadmap:[
+      ["Learn composition","Light, framing, colour and visual balance.","Visual Design"],
+      ["Practise photography","Shoot consistently and review your work critically.","Photography"],
+      ["Develop a visual style","Experiment with subjects and storytelling.","Creativity"],
+      ["Edit responsibly","Learn basic colour, crop and image organisation.","Attention to Detail"],
+      ["Build a portfolio","Curate a focused body of visual work.","Portfolio"]]},
+    {name:"Animation & Game Design",education:1,skills:{"Creativity":3,"Visual Design":3,"Video Editing":2,"Problem Solving":2},interests:["Animation & Games","Film & Filmmaking","Design & UX"],roadmap:[
+      ["Learn visual fundamentals","Shape, composition, colour and storytelling.","Visual Design"],
+      ["Choose 2D or 3D tools","Practise consistently with an animation workflow.","Creativity"],
+      ["Learn basic editing","Timing, sound and sequence are essential.","Video Editing"],
+      ["Create a playable/animated prototype","Build something small from idea to output.","Problem Solving"],
+      ["Build a showreel/portfolio","Show process as well as finished work.","Portfolio"]]},
+    {name:"Architecture",education:1,skills:{"Drawing / Sketching":3,"Mathematics":2,"Visual Design":3,"CAD / 3D Modelling":2,"Creativity":3},interests:["Architecture & Built Environment","Civil Engineering","Design & UX"],roadmap:[
+      ["Strengthen drawing","Perspective, proportion and visual communication.","Drawing / Sketching"],
+      ["Learn design principles","Space, form, light and human use.","Visual Design"],
+      ["Learn CAD/3D tools","Translate ideas into accurate models.","CAD / 3D Modelling"],
+      ["Build design projects","Create small architectural concepts.","Creativity"],
+      ["Explore architecture pathways","Understand degree, portfolio and professional requirements.","Portfolio"]]},
+    {name:"Medicine / Healthcare",education:1,skills:{"Biology & Life Science":3,"Chemistry":2,"Empathy":3,"Attention to Detail":3,"Problem Solving":2},interests:["Medicine & Healthcare","Biology & Biotechnology"],roadmap:[
+      ["Strengthen biology","Build strong human biology and life-science foundations.","Biology & Life Science"],
+      ["Strengthen chemistry","Understand the science behind medicine.","Chemistry"],
+      ["Build careful working habits","Accuracy matters in healthcare.","Attention to Detail"],
+      ["Develop empathy","Understand patients and communicate respectfully.","Empathy"],
+      ["Research healthcare pathways","Compare medicine, nursing, pharmacy and allied health.","Research"]]},
+    {name:"Biotechnology & Life Sciences",education:2,skills:{"Biology & Life Science":3,"Chemistry":2,"Research":3,"Statistics":2,"Attention to Detail":2},interests:["Biology & Biotechnology","Pure Science & Research"],roadmap:[
+      ["Strengthen biology","Cells, genetics, physiology and life processes.","Biology & Life Science"],
+      ["Build chemistry foundations","Understand molecular and laboratory concepts.","Chemistry"],
+      ["Learn research methods","Experiments, evidence and scientific reading.","Research"],
+      ["Practise data interpretation","Use statistics to understand results.","Statistics"],
+      ["Explore a lab project","Gain hands-on exposure and document your work.","Portfolio"]]},
+    {name:"Pure Science & Research",education:1,skills:{"Mathematics":2,"Physics":2,"Chemistry":2,"Research":3,"Writing":2},interests:["Pure Science & Research"],roadmap:[
+      ["Choose a science direction","Physics, chemistry, mathematics or interdisciplinary science.","Research"],
+      ["Strengthen fundamentals","Build the academic base for deeper study.","Mathematics"],
+      ["Learn scientific method","Questions, hypotheses, experiments and evidence.","Research"],
+      ["Complete a small investigation","Analyse and communicate results.","Writing"],
+      ["Explore higher study","Research degree, olympiad, lab and academic pathways.","Portfolio"]]},
+    {name:"Teaching & Education",education:1,skills:{"Teaching / Explaining":3,"Communication":3,"Empathy":3,"Writing":2,"Leadership":2},interests:["Education & Teaching","Psychology"],roadmap:[
+      ["Practise explaining simply","Teach a concept to someone else.","Teaching / Explaining"],
+      ["Understand how people learn","Explore learning differences and motivation.","Empathy"],
+      ["Strengthen communication","Present clearly to groups.","Communication"],
+      ["Create learning material","Notes, activities, videos or lesson plans.","Writing"],
+      ["Get teaching experience","Tutor, volunteer or assist a class/workshop.","Portfolio"]]},
+    {name:"Chef / Culinary Arts",education:1,skills:{"Cooking":3,"Creativity":3,"Attention to Detail":3,"Organisation":2,"Teamwork":2},interests:["Culinary Arts & Chef Careers","Hospitality & Tourism"],roadmap:[
+      ["Master kitchen basics","Knife skills, hygiene, heat and mise en place.","Cooking"],
+      ["Explore cuisines","Build range across dishes and techniques.","Creativity"],
+      ["Practise consistency","Recipes, measurements and presentation.","Attention to Detail"],
+      ["Work under pressure","Plan prep and coordinate with a team.","Organisation"],
+      ["Build a food portfolio","Document dishes, menus or kitchen experience.","Portfolio"]]},
+    {name:"Hospitality & Tourism",education:1,skills:{"Communication":3,"Empathy":3,"Organisation":3,"Teamwork":2,"Business Acumen":2},interests:["Hospitality & Tourism","BBA / Business Administration"],roadmap:[
+      ["Learn guest experience basics","Service, professionalism and problem solving.","Empathy"],
+      ["Strengthen communication","Clear, friendly and professional interaction.","Communication"],
+      ["Practise event/operation planning","Coordinate details and timelines.","Organisation"],
+      ["Learn business basics","Revenue, costs and service operations.","Business Acumen"],
+      ["Get real hospitality exposure","Volunteer, intern or work in events/hospitality.","Portfolio"]]},
+    {name:"Fashion & Textile Design",education:1,skills:{"Creativity":3,"Visual Design":3,"Drawing / Sketching":2,"Attention to Detail":2,"Business Acumen":1},interests:["Fashion & Textiles","Design & UX","Film & Filmmaking"],roadmap:[
+      ["Learn visual fundamentals","Colour, form, proportion and composition.","Visual Design"],
+      ["Sketch ideas","Create fashion concepts and moodboards.","Drawing / Sketching"],
+      ["Experiment with materials","Understand fabrics, construction and finish.","Attention to Detail"],
+      ["Develop a collection","Turn ideas into a coherent body of work.","Creativity"],
+      ["Build a fashion portfolio","Document process, concepts and finished pieces.","Portfolio"]]},
+    {name:"Environmental Science & Sustainability",education:1,skills:{"Biology & Life Science":2,"Chemistry":1,"Research":2,"Statistics":2,"Communication":2},interests:["Environment & Sustainability","Biology & Biotechnology","Civil Engineering"],roadmap:[
+      ["Understand environmental systems","Ecology, resources and human impact.","Biology & Life Science"],
+      ["Learn to investigate evidence","Use scientific sources and observations.","Research"],
+      ["Understand environmental data","Basic statistics and measurement.","Statistics"],
+      ["Communicate solutions","Explain environmental issues to others.","Communication"],
+      ["Join a real sustainability project","Volunteer, research or build a local solution.","Portfolio"]]},
+    {name:"Agriculture & Food Science",education:1,skills:{"Biology & Life Science":2,"Chemistry":2,"Research":2,"Problem Solving":2,"Organisation":1},interests:["Agriculture & Food Science","Biology & Biotechnology","Environment & Sustainability"],roadmap:[
+      ["Learn life-science foundations","Plants, animals, soil and ecosystems.","Biology & Life Science"],
+      ["Explore food/soil chemistry","Understand quality, nutrients and processes.","Chemistry"],
+      ["Study real agricultural problems","Water, yield, pests, food safety and sustainability.","Research"],
+      ["Build a practical project","Try a garden, food experiment or agri-tech idea.","Problem Solving"],
+      ["Explore agriculture careers","Science, technology, management and field pathways.","Portfolio"]]}
+  ];
+
+  const SKILL_CATEGORIES = {
+    "Tech / IT": ["Python","C","C++","Java","JavaScript","HTML/CSS","React","TypeScript","Node.js","SQL","Git / GitHub","Cloud / DevOps","Basic Computer Skills","Excel / Spreadsheets","Problem Solving"],
+    "Electronics / Embedded": ["Electronics & Circuits","Arduino / Microcontrollers"],
+    "Engineering / Core": ["CAD / 3D Modelling","Mathematics","Physics","Attention to Detail","Drawing / Sketching"],
+    "Science / Research": ["Chemistry","Biology & Life Science","Statistics","Research"],
+    "Business / Commerce": ["Business Acumen","Accounting / Commerce","Economics","Leadership","Organisation"],
+    "Communication / Humanities": ["Communication","Public Speaking","Writing","Legal Reasoning","Debate & Argumentation","Empathy"],
+    "Design / Media": ["Creativity","Visual Design","Video Editing","Photography"],
+    "Education / People": ["Teaching / Explaining","Teamwork"],
+    "Practical / Vocational": ["Cooking"]
+  };
+
+  const selectedSkills = new Set();
+  const selectedInterests = new Set();
+  const skillAnswers = {};
+  const interestAnswers = {};
+  const gainedSkills = new Set();
+  let generated = false;
+
+  const skillChips = document.getElementById("skillChips");
+  const interestChips = document.getElementById("interestChips");
+  const skillQuestions = document.getElementById("skillQuestions");
+  const interestQuestions = document.getElementById("interestQuestions");
+  const skillHint = document.getElementById("skillHint");
+  const interestHint = document.getElementById("interestHint");
+
+  function makeChip(label,container,set,answers,renderQuestions,hint){
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="chip";
+    button.textContent=label;
+    button.setAttribute("aria-pressed","false");
+    button.addEventListener("click",function(){
+      if(set.has(label)){
+        set.delete(label);
+        delete answers[label];
+        button.classList.remove("active");
+        button.setAttribute("aria-pressed","false");
+      }else{
+        set.add(label);
+        answers[label]=answers[label]||(set===selectedInterests?[]:{});
+        button.classList.add("active");
+        button.setAttribute("aria-pressed","true");
+      }
+      hint.textContent=set.size+(set===selectedSkills?(set.size===1?" skill selected":" skills selected"):(set.size===1?" interest selected":" interests selected"));
+      renderQuestions();
+      if(generated) renderAll();
+    });
+    container.appendChild(button);
+  }
+
+  const categoryList=document.createElement("div");
+  categoryList.className="skill-category-list";
+  Object.keys(SKILL_CATEGORIES).forEach(category=>{
+    const wrapper=document.createElement("div");
+    wrapper.className="skill-category";
+    const toggle=document.createElement("button");
+    toggle.type="button";
+    toggle.className="skill-category-toggle";
+    toggle.innerHTML=`<span>${category}</span><span class="category-count"></span><span class="category-chevron">▼</span>`;
+    const skillsBox=document.createElement("div");
+    skillsBox.className="skill-category-skills";
+    const count=toggle.querySelector(".category-count");
+    function updateCount(){
+      const picked=SKILL_CATEGORIES[category].filter(x=>selectedSkills.has(x)).length;
+      count.textContent=picked?`${picked} selected · ${SKILL_CATEGORIES[category].length} skills`: `${SKILL_CATEGORIES[category].length} skills`;
+    }
+    toggle.addEventListener("click",()=>wrapper.classList.toggle("open"));
+    SKILL_CATEGORIES[category].forEach(skill=>{
+      if(!SKILLS[skill]) return;
+      const before=selectedSkills.has(skill);
+      makeChip(skill,skillsBox,selectedSkills,skillAnswers,()=>{renderSkillQuestions();updateCount();},skillHint);
+    });
+    wrapper.appendChild(toggle);
+    wrapper.appendChild(skillsBox);
+    categoryList.appendChild(wrapper);
+    updateCount();
+  });
+  skillChips.appendChild(categoryList);
+  Object.keys(INTERESTS).forEach(interest=>makeChip(interest,interestChips,selectedInterests,interestAnswers,renderInterestQuestions,interestHint));
+
+  function renderSkillQuestions(){
+    skillQuestions.innerHTML="";
+    if(!selectedSkills.size){skillQuestions.classList.remove("show");return;}
+    skillQuestions.classList.add("show");
+    selectedSkills.forEach(skill=>{
+      const definition=SKILLS[skill];
+      const card=document.createElement("div");
+      card.className="followup-card";
+      card.innerHTML=`<div class="followup-title">${skill}</div><div class="followup-subtitle">Tell us about your actual experience with ${skill}. There are no wrong answers.</div>`;
+      definition.questions.forEach(question=>{
+        const q=document.createElement("div"); q.className="question";
+        const label=document.createElement("span"); label.className="question-label"; label.textContent=question.label;
+        const grid=document.createElement("div"); grid.className="option-grid";
+        const current=skillAnswers[skill]&&skillAnswers[skill][question.id]?skillAnswers[skill][question.id]:[];
+        question.options.forEach(option=>{
+          const b=document.createElement("button"); b.type="button"; b.className="option"; b.textContent=option;
+          if(current.includes(option)) b.classList.add("selected");
+          b.addEventListener("click",function(){
+            skillAnswers[skill]=skillAnswers[skill]||{};
+            if(question.multi){
+              skillAnswers[skill][question.id]=skillAnswers[skill][question.id]||[];
+              const vals=skillAnswers[skill][question.id];
+              if(vals.includes(option)){skillAnswers[skill][question.id]=vals.filter(v=>v!==option);b.classList.remove("selected");}
+              else{vals.push(option);b.classList.add("selected");}
+            }else{
+              skillAnswers[skill][question.id]=[option];
+              grid.querySelectorAll(".option").forEach(x=>x.classList.remove("selected"));
+              b.classList.add("selected");
+            }
+            if(generated) renderAll();
+          });
+          grid.appendChild(b);
+        });
+        q.appendChild(label);q.appendChild(grid);card.appendChild(q);
+      });
+      skillQuestions.appendChild(card);
+    });
+  }
+
+  function renderInterestQuestions(){
+    interestQuestions.innerHTML="";
+    if(!selectedInterests.size){interestQuestions.classList.remove("show");return;}
+    interestQuestions.classList.add("show");
+    selectedInterests.forEach(interest=>{
+      const card=document.createElement("div"); card.className="followup-card";
+      card.innerHTML=`<div class="followup-title">${interest}</div><div class="followup-subtitle">Which parts of this area would you most like to explore?</div>`;
+      const grid=document.createElement("div");grid.className="option-grid";
+      const current=interestAnswers[interest]||[];
+      INTERESTS[interest].forEach(option=>{
+        const b=document.createElement("button");b.type="button";b.className="option";b.textContent=option;
+        if(current.includes(option))b.classList.add("selected");
+        b.addEventListener("click",function(){
+          interestAnswers[interest]=interestAnswers[interest]||[];
+          const vals=interestAnswers[interest];
+          if(vals.includes(option)){interestAnswers[interest]=vals.filter(v=>v!==option);b.classList.remove("selected");}
+          else{vals.push(option);b.classList.add("selected");}
+          if(generated)renderAll();
+        });
+        grid.appendChild(b);
+      });
+      card.appendChild(grid);interestQuestions.appendChild(card);
+    });
+  }
+
+  function strengthFromAnswers(skill){
+    const a=skillAnswers[skill]||{};
+    let score=1;
+    const level=(a.level&&a.level[0])||"";
+    if(["Intermediate","Good","Comfortable","Strong","Advanced","Very good","Very strong","Excellent","Very confident","Highly creative","Very organised"].includes(level))score+=1;
+    if(["Advanced","Very strong","Excellent","Very confident","Highly creative","Very organised"].includes(level))score+=2;
+    const project=(a.projects&&a.projects[0])||"";
+    if(["Small programs","Small projects","Basic websites","Practice models","School/college project","School/college projects","Academic project","Academic projects","Short clips","School/social media videos","School assignments","Independent project","Small teams","Clubs/projects"].includes(project))score+=1;
+    if(["Multiple projects","Multiple websites","Real/portfolio projects","Multiple projects","Research project","Published/competitive work","Significant responsibility"].includes(project))score+=2;
+    ["libraries","concepts","tools","areas","experience","methods","contexts"].forEach(k=>{if(a[k])score+=Math.min(a[k].length,2);});
+    return Math.min(5,score);
+  }
+
+  function getSkillStrength(){
+    const strengths={};
+    selectedSkills.forEach(skill=>strengths[skill]=strengthFromAnswers(skill));
+    gainedSkills.forEach(skill=>{if(!strengths[skill])strengths[skill]=3;});
+    return strengths;
+  }
+
+  function getEquivalentStrength(skill,strengths){
+    if(strengths[skill])return strengths[skill];
+    const aliases={
+      "Programming":["Python","C","C++","Java","JavaScript","HTML/CSS"],
+      "Current Affairs":["Research","Writing","Communication"],
+      "Portfolio":["Creativity","Writing","Video Editing","Visual Design","Research","Basic Computer Skills"],
+      "Photography":["Visual Design","Creativity"],
+      "Organisation":["Organisation","Leadership"],
+      "Mathematics":["Mathematics"],
+      "Communication":["Communication","Public Speaking"],
+      "Research":["Research"]
+    };
+    if(aliases[skill])return Math.max(...aliases[skill].map(x=>strengths[x]||0));
+    return 0;
+  }
+
+  function scoreCareers(){
+    const strengths=getSkillStrength();
+    const rawEducation=document.getElementById("educationSelect")?.value;
+    const education=Number.isFinite(Number(rawEducation)) ? Number(rawEducation) : 0;
+
+    return CAREERS.map(career=>{
+      let skillPoints=0,maxSkillPoints=0;
+
+      Object.entries(career.skills||{}).forEach(([skill,rawImportance])=>{
+        const importance=Number(rawImportance);
+        if(!Number.isFinite(importance) || importance<=0)return;
+
+        const rawStrength=getEquivalentStrength(skill,strengths);
+        const strength=Number.isFinite(Number(rawStrength)) ? Number(rawStrength) : 0;
+
+        maxSkillPoints+=importance*5;
+        skillPoints+=Math.min(Math.max(strength,0),5)*importance;
+      });
+
+      const skillFit=maxSkillPoints>0
+        ? Math.min(1,Math.max(0,skillPoints/maxSkillPoints))
+        : 0;
+
+      let interestPoints=0;
+      (career.interests||[]).forEach(interest=>{
+        if(selectedInterests.has(interest))interestPoints++;
+      });
+
+      const subInterestCount=[...selectedInterests].reduce(
+        (n,i)=>n+((interestAnswers[i]||[]).length),0
+      );
+
+      const interestCount=(career.interests||[]).length;
+      const interestFit=interestCount
+        ? Math.min(1,Math.max(0,
+            (interestPoints*1.25+Math.min(subInterestCount,4)*0.05)/interestCount
+          ))
+        : 0;
+
+      let score=skillFit*.60+interestFit*.40;
+
+      const requiredEducation=Number(career.education);
+      if(Number.isFinite(requiredEducation) && education<requiredEducation){
+        score*=.82;
+      }
+
+      // Never allow one malformed value to turn the UI into "NaN%".
+      if(!Number.isFinite(score))score=0;
+
+      return {career,score,skillFit,interestFit};
+    }).sort((a,b)=>b.score-a.score);
+  }
+
+  function isStepDone(step,strengths){
+    if(gainedSkills.has(step.skill))return true;
+    return getEquivalentStrength(step.skill,strengths)>=3;
+  }
+
+  function renderAll(){
+    const scored=scoreCareers(),top=scored[0],alternatives=scored.slice(1,4);
+    const name=document.getElementById("nameInput").value.trim();
+    document.getElementById("bestFitFor").textContent=name?" for "+name:"";
+    document.getElementById("bestFitRole").textContent=top.career.name;
+    const safeTopScore=Number.isFinite(Number(top.score)) ? Number(top.score) : 0;
+    const percentage=Math.max(0,Math.min(99,Math.round(safeTopScore*100)));
+    const strengths=getSkillStrength();
+    const strongest=Object.entries(strengths).filter(([,v])=>v>=3).map(([k])=>k).slice(0,4);
+    let explanation=`${percentage}% fit based on your current skills, experience and interests.`;
+    if(strongest.length)explanation+=` Strong signals: ${strongest.join(", ")}.`;
+    if(selectedInterests.size)explanation+=` You are exploring ${[...selectedInterests].slice(0,3).join(", ")}.`;
+    if(parseInt(document.getElementById("educationSelect").value,10)<top.career.education)explanation+=` This is an exploratory fit; the pathway may require further education.`;
+    document.getElementById("bestFitWhy").textContent=explanation;
+
+    const matchList=document.getElementById("matchList");matchList.innerHTML="";
+    alternatives.forEach(item=>{
+      const safeScore=Number.isFinite(Number(item.score)) ? Number(item.score) : 0;
+      const p=Math.max(0,Math.min(99,Math.round(safeScore*100)));
+      const row=document.createElement("div");row.className="match-row";
+      row.innerHTML=`<div class="match-top"><span class="mname">${item.career.name}</span><span class="mpct">${p}% match</span></div><div class="bar-track"><div class="bar-fill" data-pct="${p}"></div></div>`;
+      matchList.appendChild(row);
+    });
+
+    const gapChips=document.getElementById("gapChips");gapChips.innerHTML="";
+    const missing=Object.keys(top.career.skills).filter(skill=>getEquivalentStrength(skill,strengths)<3).slice(0,7);
+    if(!missing.length){const span=document.createElement("span");span.className="gap-chip";span.textContent="No major skill gaps";gapChips.appendChild(span);}
+    else missing.forEach(skill=>{const span=document.createElement("span");span.className="gap-chip";span.textContent=skill;gapChips.appendChild(span);});
+
+    renderRoadmap(top.career);
+    requestAnimationFrame(()=>document.querySelectorAll(".bar-fill").forEach(bar=>bar.style.width=bar.dataset.pct+"%"));
+  }
+
+  function renderRoadmap(career){
+    const flow=document.getElementById("flowchart");flow.innerHTML="";
+    const strengths=getSkillStrength();let completed=0;
+    career.roadmap.forEach((step,index)=>{
+      if(index>0){const connector=document.createElement("div");connector.className="flow-connector";flow.appendChild(connector);}
+      const done=isStepDone({skill:step[2]},strengths);if(done)completed++;
+      const node=document.createElement("div");node.className="flow-node"+(done?" done":"");
+      node.innerHTML=`<div class="fn-top"><div class="fn-check">${done?"✓":""}</div><span class="fn-stage">Step ${index+1}</span></div><h5>${step[0]}</h5><p>${step[1]}</p><span class="fn-skill">${step[2]}</span>`;
+      if(!done){node.addEventListener("click",function(){gainedSkills.add(step[2]);renderAll();});}
+      flow.appendChild(node);
+    });
+    const total=career.roadmap.length;
+    const progressPct=total ? Math.round((completed/total)*100) : 0;
+
+    // Recalculate the roadmap percentage every time the roadmap is rendered.
+    document.getElementById("progressLabel").textContent=
+      `${completed} / ${total} steps · ${progressPct}%`;
+
+    const progressFill=document.getElementById("progressFill");
+    progressFill.style.width=progressPct+"%";
+    progressFill.setAttribute("aria-valuenow",String(progressPct));
+    progressFill.setAttribute("aria-label",`Roadmap ${progressPct}% complete`);
+  }
+
+  document.getElementById("generateBtn").addEventListener("click",function(){
+    if(!selectedSkills.size&&!selectedInterests.size){skillHint.textContent="Select at least one skill or interest.";skillHint.style.color="#D9634A";return;}
+    if(!selectedSkills.size){skillHint.textContent="Add at least one skill you already have — even beginner-level skills count.";skillHint.style.color="#D9634A";return;}
+    if(!selectedInterests.size){interestHint.textContent="Select at least one area you want to explore.";interestHint.style.color="#D9634A";return;}
+    skillHint.style.color="";interestHint.style.color="";generated=true;gainedSkills.clear();renderAll();
+    const results=document.getElementById("demoResults");results.classList.add("show");results.scrollIntoView({behavior:"smooth",block:"nearest"});
+  });
+
+  document.getElementById("resetBtn").addEventListener("click",function(){gainedSkills.clear();if(generated)renderAll();});
+  document.getElementById("educationSelect").addEventListener("change",function(){if(generated)renderAll();});
+})();
+</script>
+
+</body>
+</html>
